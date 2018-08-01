@@ -7,4 +7,3 @@ config :multichain,
   username: "multichainrpc",
   password: "xxxxxxxxxxxxxxx",
   chain: "chain1"
-

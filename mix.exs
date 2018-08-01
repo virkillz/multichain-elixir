@@ -8,7 +8,7 @@ defmodule Multichain.MixProject do
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      package: package
+      package: package()
     ]
   end
 
@@ -21,17 +21,19 @@ defmodule Multichain.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.2"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:ex_doc, "~> 0.18.0", only: :dev}
     ]
   end
 
   defp package do
-  [
-    files: ["lib", "mix.exs", "README", "LICENSE*"],
-    maintainers: ["Arif Yuliannur"],
-    licenses: ["MIT"],
-    links: %{"GitHub" => "https://github.com/virkillz/multichain-elixir.git"},
-    description: "A simple wrapper to call Multichain JSON RPC. Put config and pass params in Elixir Map"
-  ]
-end
+    [
+      files: ["lib", "mix.exs", "README", "LICENSE*"],
+      maintainers: ["Arif Yuliannur"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/virkillz/multichain-elixir.git"},
+      description:
+        "A simple wrapper to call Multichain JSON RPC. Put config and pass params in Elixir Map"
+    ]
+  end
 end

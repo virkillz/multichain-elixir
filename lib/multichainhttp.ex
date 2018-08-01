@@ -1,19 +1,19 @@
 defmodule Multichain.Http do
-  @moduledoc """
-  Documentation for Multichain.
-  """
+  @moduledoc false
 
-  @doc """
-  This function is used primarily to test your connection without performing any transaction. It will return information regarding connected multichain network
+  @doc false
+  def jsonrpccall(method, param) do
 
-  """
-  def jsonrpccall(params) do
-    case getconfig do
+    params = %{
+      method: method,
+      params: param
+    }
+
+    case getconfig() do
       {:ok, config} ->
         url = "#{config.protocol}://#{config.host}:#{config.port}"
         headers = [{"Content-type", "application/json"}]
         body = Poison.encode!(params |> Map.put("chain_name", config.chain))
-        params = {:form, [{:grant_type, "client_credentials"}]}
         options = [hackney: [basic_auth: {config.username, config.password}]]
 
         case HTTPoison.post(url, body, headers, options) do
