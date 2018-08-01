@@ -1,5 +1,6 @@
 # Multichain
 
+Multichain is a permissioned blockchain platform as a fork from bitcoin protocol. It is very useful to be an immutable ledger system which can be used in various project. Multichain by default provide JSON RPC api interface. This library is a wrapper to the JSON RPC to make easy and simple operation with Multichain instance.
 
 
 ## Installation
