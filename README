@@ -1,0 +1,5 @@
+README
+
+This is a simple wrapper for Multichain JSON RPC. 
+
+Add this as dependency, put credential in config, and call Multichain.api/1 by passing argument as Map.
