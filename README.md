@@ -1,6 +1,6 @@
 # Multichain
 
-**TODO: Add description**
+
 
 ## Installation
 
@@ -71,7 +71,20 @@ You can now call all of Multichain api in simple way by calling `Multichain.api/
 
   ```
 
-The docs can be found at [https://hexdocs.pm/multichain](https://hexdocs.pm/multichain).
+The docs of this package can be found at [https://hexdocs.pm/multichain](https://hexdocs.pm/multichain).
 
+Multichain complete API can be found [https://www.multichain.com/developers/json-rpc-api/](https://www.multichain.com/developers/json-rpc-api/).
+
+### TODO
+
+Some of common task is a combination of multiple api call. Previously has been implemented in python and nodejs. We should make it here too to simplify common operation.
+
+- [ ] Check balance api
+- [ ] Create Address api
+- [ ] Publish Stream api
+- [ ] Retreive stream api
+- [ ] Create new asset
+- [ ] Reissue new asset
+- [ ] List asset
 
 

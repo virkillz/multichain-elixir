@@ -10,7 +10,7 @@
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
 
-# Where 3rd-party dependencies like ExDoc output generated docs.
+# Hide my config
 /config/config.secret.exs
 /config/config.exs
 
