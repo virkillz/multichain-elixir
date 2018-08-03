@@ -3,7 +3,6 @@ defmodule Multichain.Http do
 
   @doc false
   def jsonrpccall(method, param) do
-
     params = %{
       method: method,
       params: param
@@ -13,7 +12,7 @@ defmodule Multichain.Http do
       {:ok, config} ->
         url = "#{config.protocol}://#{config.host}:#{config.port}"
         headers = [{"Content-type", "application/json"}]
-        body = Poison.encode!(params |> Map.put("chain_name", config.chain))
+        body = Poison.encode!(params |> Map.put("chain_name", config.chain)) |> IO.inspect()
         options = [hackney: [basic_auth: {config.username, config.password}]]
 
         case HTTPoison.post(url, body, headers, options) do
@@ -28,6 +27,27 @@ defmodule Multichain.Http do
           _ ->
             {:error, "Cannot connect to Multichain node. Check the server address and port."}
         end
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
+  @doc false
+  def jsonrpccall!(method, param) do
+    params = %{
+      method: method,
+      params: param
+    }
+
+    case getconfig() do
+      {:ok, config} ->
+        url = "#{config.protocol}://#{config.host}:#{config.port}"
+        headers = [{"Content-type", "application/json"}]
+        body = Poison.encode!(params |> Map.put("chain_name", config.chain))
+        options = [hackney: [basic_auth: {config.username, config.password}]]
+
+        HTTPoison.post(url, body, headers, options)
 
       {:error, reason} ->
         {:error, reason}

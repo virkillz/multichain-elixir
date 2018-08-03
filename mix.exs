@@ -32,8 +32,7 @@ defmodule Multichain.MixProject do
       maintainers: ["Arif Yuliannur"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/virkillz/multichain-elixir.git"},
-      description:
-        "A simple wrapper to call Multichain JSON RPC. Put config and pass params in Elixir Map"
+      description: "A simple wrapper to call Multichain JSON RPC API in Elixir way."
     ]
   end
 end
