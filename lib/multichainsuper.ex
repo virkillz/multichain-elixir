@@ -89,8 +89,6 @@ defmodule Multichain.Super do
       {:ok, %{"error" => nil, "id" => nil, "result" => result}} ->
         case Http.jsonrpccall("signrawtransaction", [result, [], [privkey]]) do
           {:ok, %{"error" => nil, "id" => nil, "result" => %{"complete" => true, "hex" => hex}}} ->
-            hex
-
             case Http.jsonrpccall("sendrawtransaction", [hex]) do
               {:ok, %{"error" => nil, "id" => nil, "result" => trxid}} -> {:ok, trxid}
               other -> other
