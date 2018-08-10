@@ -4,7 +4,7 @@ defmodule Multichain.MixProject do
   def project do
     [
       app: :multichain,
-      version: "0.0.3",
+      version: "0.0.4",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -32,7 +32,8 @@ defmodule Multichain.MixProject do
       maintainers: ["Arif Yuliannur"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/virkillz/multichain-elixir.git"},
-      description: "A simple wrapper to call Multichain JSON RPC API in Elixir way. Also bunch of helper which combine common Multichain command."
+      description:
+        "A simple wrapper to call Multichain JSON RPC API in Elixir way. Also bunch of helper which combine common Multichain command."
     ]
   end
 end

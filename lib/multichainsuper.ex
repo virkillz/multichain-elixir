@@ -26,7 +26,7 @@ defmodule Multichain.Super do
         case Http.jsonrpccall("importaddress", [keypair["address"], "", false]) do
           # 3. grant permission sent
           {:ok, _result2} ->
-            case Http.jsonrpccall("grant", [keypair["address"], "receive, receive"]) do
+            case Http.jsonrpccall("grant", [keypair["address"], "send,receive"]) do
               {:ok, _result4} -> {:ok, keypair}
               other -> other
             end
@@ -218,6 +218,52 @@ defmodule Multichain.Super do
     case Multichain.api("listpermissions", ["*", address]) do
       {:ok, result} -> find_send_permission(result["result"])
       error -> error
+    end
+  end
+
+  @doc """
+  This is a helper function to check whether an address have send permission or not.
+
+  You can unblock (give send permission) by using `unblock/1`
+  """
+  def publish_stream(addr, streamname, key, value, privkey) do
+    compose =
+      case Multichain.api("createrawsendfrom", [
+             addr,
+             %{},
+             [%{"for" => streamname, "key" => key, "data" => Base.encode16(value)}]
+           ]) do
+        {:ok, %{"error" => _error, "id" => _id, "result" => result}} ->
+          case Multichain.api("signrawtransaction", [result, [], [privkey], nil]) do
+            {:ok, %{"error" => nil, "id" => nil, "result" => %{"complete" => true, "hex" => hex}}} ->
+              Multichain.api("sendrawtransaction", [hex])
+
+            other ->
+              other
+          end
+
+        other ->
+          other
+      end
+  end
+
+  def get_stream_data!(stream, txid) do
+    case Multichain.api("getstreamitem", [stream, txid]) do
+      {:ok, %{"error" => nil, "id" => nil, "result" => result}} -> result
+      other -> other
+    end
+  end
+
+  def get_stream_data(stream, txid) do
+    case Multichain.api("getstreamitem", [stream, txid]) do
+      {:ok, %{"error" => nil, "id" => nil, "result" => result}} ->
+        case Base.decode16(result["data"], case: :lower) do
+          {:ok, string} -> string
+          _ -> :error
+        end
+
+      other ->
+        other
     end
   end
 

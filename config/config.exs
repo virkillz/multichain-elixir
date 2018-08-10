@@ -1,10 +1,19 @@
 use Mix.Config
 
+# getchain
+# config :multichain,
+#   protocol: "http",
+#   port: "9242",
+#   host: "uatblockchain.getmya.io",
+#   username: "multichainrpc",
+#   password: "9YZbdCN4XXUV64CQzJWztBcCESrVNiGZkovuYgnUs4S4",
+#   chain: "getchain"
+
+# testchain
 config :multichain,
   protocol: "http",
-  port: "1234",
-  host: "188.199.177",
+  port: "9220",
+  host: "uatblockchain.getmya.io",
   username: "multichainrpc",
-  password: "xxxxxxxxxxxxxxx",
-  chain: "chain1"
-
+  password: "hByvArunyPTpoPFkZiGS2L7iEENrGbhqs4WQ4ZHDQep",
+  chain: "testchain"

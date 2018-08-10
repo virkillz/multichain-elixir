@@ -87,5 +87,6 @@ Some of common task is a combination of multiple api call. Previously has been i
 - [ ] Create new asset
 - [ ] Reissue new asset
 - [ ] List asset
+- FIX STREAM DECODEE
 
 

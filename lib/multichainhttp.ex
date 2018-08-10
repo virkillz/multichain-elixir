@@ -12,12 +12,14 @@ defmodule Multichain.Http do
       {:ok, config} ->
         url = "#{config.protocol}://#{config.host}:#{config.port}"
         headers = [{"Content-type", "application/json"}]
-        body = Poison.encode!(params |> Map.put("chain_name", config.chain)) |> IO.inspect()
+        body = Poison.encode!(params |> Map.put("chain_name", config.chain))
         options = [hackney: [basic_auth: {config.username, config.password}]]
 
         case HTTPoison.post(url, body, headers, options) do
           # check the status code
           {:ok, result} ->
+            result
+
             case result.status_code do
               200 -> Poison.decode(result.body)
               401 -> {:error, "Unauthorized. The supplied credential is incorrect"}
@@ -54,7 +56,7 @@ defmodule Multichain.Http do
     end
   end
 
-  defp getconfig do
+  def getconfig do
     port = Application.get_env(:multichain, :port)
     host = Application.get_env(:multichain, :host)
     username = Application.get_env(:multichain, :username)
